@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { generateWelcomeEmailTemplate } from './email-template';
 
 export async function POST(request: NextRequest) {
   try {
@@ -109,36 +110,19 @@ export async function POST(request: NextRequest) {
       `,
     };
 
+    // Get website URL for email template (logo and links)
+    const websiteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : 'https://your-website.com';
+
     // Email to the user (acknowledgment) - confirmation they joined the waitlist
     const userMailOptions = {
       from: fromEmail,
       to: email, // The user's email who signed up
       subject: 'Welcome to the Flippay Waitlist! 🎉',
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #00bfff;">Welcome to the Flippay Waitlist!</h2>
-          <p>Thank you for joining our waitlist! We're excited to have you on board.</p>
-          
-          <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p style="margin: 0;"><strong>What's next?</strong></p>
-            <ul style="margin: 10px 0; padding-left: 20px;">
-              <li>You'll be among the first to know when Flippay launches</li>
-              <li>Get exclusive early access to our platform</li>
-              <li>Receive updates on new features and announcements</li>
-            </ul>
-          </div>
-
-          <p>We're building something special, and we can't wait to share it with you. Stay tuned for updates!</p>
-          
-          <p>Best regards,<br><strong>The Flippay Team</strong></p>
-          
-          <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 30px 0;">
-          <p style="color: #64748b; font-size: 12px;">
-            You're receiving this email because you signed up for the Flippay waitlist. 
-            If you didn't sign up, please ignore this email.
-          </p>
-        </div>
-      `,
+      html: generateWelcomeEmailTemplate({
+        websiteUrl,
+      }),
       text: `
         Welcome to the Flippay Waitlist!
         
