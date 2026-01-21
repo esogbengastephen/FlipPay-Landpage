@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-plus-jakarta: 'Plus Jakarta Sans', sans-serif;
+    --font-playfair: 'Playfair Display', serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+    font-family: var(--font-plus-jakarta);
+  }
+
+  .serif-accent {
+    font-family: var(--font-playfair);
+    font-style: italic;
+  }
+
+  .selection\:bg-indigo-100::selection {
+    background-color: rgb(179 235 255);
+  }
+
+  .selection\:text-indigo-900::selection {
+    color: rgb(0 92 153);
+  }
+}
