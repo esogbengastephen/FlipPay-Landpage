@@ -26,8 +26,10 @@ const Blog = () => {
                 <Image 
                   src={post.imageUrl} 
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-700" 
                   alt={post.title}
+                  loading="lazy"
                 />
               </div>
               <div className="space-y-4 px-2">

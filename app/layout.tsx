@@ -4,17 +4,21 @@ import './globals.css';
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-plus-jakarta',
   display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 });
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['400', '600', '700'],
   variable: '--font-playfair',
   display: 'swap',
   style: ['normal', 'italic'],
+  preload: true,
+  fallback: ['Georgia', 'serif'],
 });
 
 export const metadata: Metadata = {
@@ -24,6 +28,12 @@ export const metadata: Metadata = {
     icon: '/logo/favicon.png',
     shortcut: '/logo/favicon.png',
     apple: '/logo/favicon.png',
+  },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://flippay.com'),
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Flippay',
   },
 };
 

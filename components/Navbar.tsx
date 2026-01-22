@@ -52,6 +52,7 @@ const Navbar = () => {
               width={40} 
               height={40}
               className="object-contain"
+              priority
             />
           </div>
           <span className={`text-xl font-bold tracking-tight transition-colors ${isMobileMenuOpen ? 'text-slate-900' : 'text-slate-900'}`}>Flippay</span>

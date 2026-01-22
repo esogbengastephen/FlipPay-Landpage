@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
 import { SLIDES } from '@/lib/constants';
 
 const Hero = () => {
@@ -77,11 +78,14 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-center lg:justify-start">
               <div className="flex -space-x-3">
                 {[1, 2, 3, 4].map((i) => (
-                  <img 
+                  <Image 
                     key={i} 
                     src={`https://i.pravatar.cc/100?u=user${i}`} 
+                    width={40}
+                    height={40}
                     className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-4 border-white shadow-sm"
                     alt="User"
+                    loading="lazy"
                   />
                 ))}
               </div>
@@ -107,10 +111,14 @@ const Hero = () => {
                       index === currentSlide ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-110 z-0'
                     }`}
                   >
-                    <img 
+                    <Image 
                       src={slide.imageUrl} 
-                      className="w-full h-full object-cover opacity-60 mix-blend-overlay"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover opacity-60 mix-blend-overlay"
                       alt={slide.title}
+                      priority={index === 0}
+                      loading={index === 0 ? 'eager' : 'lazy'}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
                     <div className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 sm:right-10 right-6">
@@ -122,10 +130,10 @@ const Hero = () => {
 
                 {/* Carousel Controls - Hide on small mobile */}
                 <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 px-2 sm:px-4 hidden sm:flex justify-between z-20 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button onClick={prevSlide} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-white/30 transition-all">
+                  <button onClick={prevSlide} aria-label="Previous slide" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-white/30 transition-all">
                     <ChevronLeft className="w-5 h-5" />
                   </button>
-                  <button onClick={nextSlide} className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-white/30 transition-all">
+                  <button onClick={nextSlide} aria-label="Next slide" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-white/30 transition-all">
                     <ChevronRight className="w-5 h-5" />
                   </button>
                 </div>
@@ -136,6 +144,7 @@ const Hero = () => {
                     <button 
                       key={i}
                       onClick={() => setCurrentSlide(i)}
+                      aria-label={`Go to slide ${i + 1}`}
                       className={`h-1 sm:h-1.5 transition-all duration-300 rounded-full ${
                         i === currentSlide ? 'w-6 sm:w-8 bg-indigo-500' : 'w-1.5 sm:w-2 bg-white/40'
                       }`}
