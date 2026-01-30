@@ -64,9 +64,12 @@ const Hero = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button className="bg-indigo-600 text-white h-14 sm:h-16 px-8 sm:px-10 rounded-2xl font-bold text-base sm:text-lg shadow-2xl shadow-indigo-200 hover:bg-indigo-700 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+              <a 
+                href="https://www.flippay.app" 
+                className="bg-indigo-600 text-white h-14 sm:h-16 px-8 sm:px-10 rounded-2xl font-bold text-base sm:text-lg shadow-2xl shadow-indigo-200 hover:bg-indigo-700 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
+              >
                 Get Started Now
-              </button>
+              </a>
               <button className="bg-white text-slate-900 h-14 sm:h-16 px-8 sm:px-10 rounded-2xl font-bold text-base sm:text-lg border border-slate-200 hover:bg-slate-50 transition-all flex items-center justify-center gap-3 group">
                 <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center group-hover:bg-indigo-100 transition-colors">
                   <Play className="w-3 h-3 fill-indigo-600 text-indigo-600 ml-0.5" />
